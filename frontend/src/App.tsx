@@ -1,4 +1,5 @@
-import React, {
+import { debounce } from "lodash";
+import {
   ChangeEvent,
   useCallback,
   useMemo,
@@ -6,10 +7,9 @@ import React, {
   useState,
 } from "react";
 import "./App.css";
-import { debounce } from "lodash";
 import UserCard from "./component/UserCard";
 
-const BASE_API_URL = "http://localhost:3000/api";
+const BASE_API_URL = process.env.BASE_API_URL;
 
 function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -22,7 +22,6 @@ function App() {
 
   const handleSearchInput = useCallback(
     debounce((e: ChangeEvent<HTMLInputElement>) => {
-      console.log("handleSearchInput -->", e?.target?.value);
       setSearch(e?.target?.value);
     }, 1000),
     []
