@@ -13,7 +13,7 @@ interface UserData {
 export const insertUser = async (req: Request, res: Response) => {
   const db = await createConnection();
 
-  const uploadedFile = req.file as any;
+  const uploadedFile = req.file as Express.Multer.File; 
   const filePath = `uploads/${uploadedFile.filename}`;
 
   try {

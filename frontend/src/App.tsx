@@ -60,8 +60,6 @@ function App() {
     async (content: File[]) => {
       setIsLoading(true);
 
-
-      console.log('log --', process.env.REACT_APP_BACKEND_API_URL);
       try {
         const file = content[0];
         const formData = new FormData();
