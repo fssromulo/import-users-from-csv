@@ -9,8 +9,6 @@ import React, {
 import "./App.css";
 import UserCard from "./component/UserCard";
 
-const BASE_API_URL = process.env.BASE_API_URL;
-
 function App() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [userList, setUserList] = useState<any[]>([]);
@@ -32,9 +30,10 @@ function App() {
       setIsLoading(true);
 
       let q = search.toString();
-      let requestUrl = BASE_API_URL + "/users";
+      let requestUrl = process.env.BACKEND_API_URL + "/users";
       if (q.length > 0) {
-        requestUrl = BASE_API_URL + `/users?q=${encodeURIComponent(q)}`;
+        requestUrl =
+          process.env.BACKEND_API_URL + `/users?q=${encodeURIComponent(q)}`;
       }
 
       const response = await fetch(requestUrl);
@@ -73,7 +72,10 @@ function App() {
           body: formData,
         };
 
-        const response = await fetch(BASE_API_URL + "/files", requestOptions);
+        const response = await fetch(
+          process.env.BACKEND_API_URL + "/files",
+          requestOptions
+        );
         if (!response.ok) {
           throw new Error(`Response status: ${response.status}`);
         }
