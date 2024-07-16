@@ -37,6 +37,19 @@ app.post('/api/files', upload.single('file'), async (req, res) => {
   return await insertUser(req, res);
 });
 
+// Default route
+app.get('*', (req, res) => {
+  res.send(`<h2>Server is running, but this page is not available.</h2>
+      <br/>
+      Available endpoints:
+      <br/>
+      <ul>
+        <li>GET api/users</li>
+        <li>POST api/files</li>
+      </ul>
+    `);
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port: ${port}`);
 });
