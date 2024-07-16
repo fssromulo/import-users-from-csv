@@ -30,10 +30,10 @@ function App() {
       setIsLoading(true);
 
       let q = search.toString();
-      let requestUrl = process.env.BACKEND_API_URL + "/users";
+      let requestUrl = process.env.REACT_APP_BACKEND_API_URL + "/users";
       if (q.length > 0) {
         requestUrl =
-          process.env.BACKEND_API_URL + `/users?q=${encodeURIComponent(q)}`;
+          process.env.REACT_APP_BACKEND_API_URL + `/users?q=${encodeURIComponent(q)}`;
       }
 
       const response = await fetch(requestUrl);
@@ -60,6 +60,8 @@ function App() {
     async (content: File[]) => {
       setIsLoading(true);
 
+
+      console.log('log --', process.env.REACT_APP_BACKEND_API_URL);
       try {
         const file = content[0];
         const formData = new FormData();
@@ -73,7 +75,7 @@ function App() {
         };
 
         const response = await fetch(
-          process.env.BACKEND_API_URL + "/files",
+          process.env.REACT_APP_BACKEND_API_URL + "/files",
           requestOptions
         );
         if (!response.ok) {
